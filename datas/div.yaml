@@ -1,0 +1,13 @@
+int:
+  - 10
+  - 5
+  - 2
+
+int1:
+  [21, 5, 4.2]
+
+float:
+  [0.4, -0.2, -2]
+
+divider0:
+  [1, 0, divider cannot be 0]
