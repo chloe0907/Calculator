@@ -1,4 +1,5 @@
 import sys
+from decimal import Decimal
 
 import allure
 import pytest
@@ -68,13 +69,14 @@ class TestCalc:
 
         assert result == self.cal.div(a, b)
 
+    @pytest.mark.dependency()
     @allure.story("减法")
     @pytest.mark.parametrize('a, b, result', yaml.safe_load(open("../datas/sub.yaml")))
     def test_sub(self, a, b, result):
         # cal = Calculator()
-        tmp = result - self.cal.sub(a, b)
-        math.isclose(tmp, result)
+        assert Decimal(result) == Decimal(self.cal.sub(a, b))
 
+    @pytest.mark.dependency(depends=["test_sub"])
     @allure.story("乘法")
     @pytest.mark.parametrize('a, b, result', yaml.safe_load(open("../datas/multi.yaml")))
     def test_multi(self, a, b, result):
